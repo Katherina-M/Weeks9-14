@@ -9,13 +9,16 @@ public class Knight : MonoBehaviour
     Animator animator;
     public float speed = 2;
     public bool canRun = true;
+    AudioSource audio;
 
+    public AudioClip[] audioClips;
 
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -38,6 +41,13 @@ public class Knight : MonoBehaviour
         {
             transform.position += transform.right * directiion * speed * Time.deltaTime;
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            int randomNumber = Random.Range(0, audioClips.Length);
+            audio.PlayOneShot(audioClips[randomNumber]);
+            canRun = false;
+        }
     }
 
 
@@ -46,4 +56,23 @@ public class Knight : MonoBehaviour
         Debug.Log("The attack is finsihed");
         canRun = true;
     }
+    
+    public void FootStepSound()
+    {
+        Debug.Log("Here is foot step sound!");
+        if (canRun == true)
+        {
+            int randomNumber = Random.Range(0, audioClips.Length);
+            audio.PlayOneShot(audioClips[randomNumber]);
+            canRun = false;
+        }
+
+        if (!audio.isPlaying)
+        {
+            int randomNumber = Random.Range(0, audioClips.Length);
+            audio.PlayOneShot(audioClips[randomNumber]);
+        }
+
+    }
+
 }
