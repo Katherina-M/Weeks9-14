@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
+using Cinemachine;
 using UnityEngine;
+
 
 public class Knight : MonoBehaviour
 {
@@ -12,7 +11,8 @@ public class Knight : MonoBehaviour
     AudioSource audio;
 
     public AudioClip[] audioClips;
-
+    public CinemachineImpulseSource impulseSource;
+ 
 
     void Start()
     {
@@ -23,6 +23,21 @@ public class Knight : MonoBehaviour
 
     void Update()
     {
+
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.position += Vector3.right * speed * Time.deltaTime;
+            impulseSource.GenerateImpulse();
+
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.position += Vector3.left * speed * Time.deltaTime;
+            impulseSource.GenerateImpulse();
+        }
+
         float directiion = Input.GetAxis("Horizontal");
 
 
@@ -72,7 +87,5 @@ public class Knight : MonoBehaviour
             int randomNumber = Random.Range(0, audioClips.Length);
             audio.PlayOneShot(audioClips[randomNumber]);
         }
-
     }
-
 }
