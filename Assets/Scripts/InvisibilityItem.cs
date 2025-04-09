@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static InvisibilityEvent;
 
 public class InvisibilityItem : MonoBehaviour
 {
     public Transform player;
     public float pickupRange = 1f;
+    public uiManager uiManager;
+    public InvisibilityEvent invisibilityEvents;
+    public EnemySystem[] enemies;
 
-    private bool hasSetPosition = false;
     private Vector2 minBound, maxBound;
     private Camera mainCam;
 
@@ -30,6 +33,23 @@ public class InvisibilityItem : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         SetRandomPosition();
+
+        //Listener Control
+        if (invisibilityEvents != null)
+        {
+            if (uiManager != null)
+            {
+                invisibilityEvents.OnPlayerInvisible.AddListener(uiManager.OnPlayerBecameInvisible);
+            }
+
+            foreach (EnemySystem enemy in enemies)
+            {
+                if (enemy != null)
+                {
+                    invisibilityEvents.OnPlayerInvisible.AddListener(enemy.StopTrackingPlayer);
+                }
+            }
+        }
     }
 
     void Update()
@@ -54,11 +74,27 @@ public class InvisibilityItem : MonoBehaviour
                 spriteRenderer.enabled = false;
                 isHidden = true;
                 hiddenTimer = 5f;
+
+                //Listener
+                if (invisibilityEvents != null)
+                {
+                    invisibilityEvents.TriggerInvisibility();
+                }
+
+                if (uiManager != null)
+                {
+                    Debug.Log("uiManager found, applying effect...");
+                    uiManager.ApplyInvisibilityEffect();
+                }
+                else
+                {
+                    Debug.LogWarning("uiManager is NULL!");
+                }
             }
         }
     }
 
-        void SetRandomPosition()
+    void SetRandomPosition()
         {
             float x = Random.Range(minBound.x + 0.5f, maxBound.x - 0.5f);
             float y = Random.Range(minBound.y + 0.5f, maxBound.y - 0.5f);

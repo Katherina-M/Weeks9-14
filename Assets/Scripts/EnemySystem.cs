@@ -16,6 +16,7 @@ public class EnemySystem : MonoBehaviour
     private Vector2 minBound;
     private Vector2 maxBound;
     private bool isChasing = false;
+    private bool canSeePlayer = true;
 
     void Start()
     {
@@ -32,7 +33,7 @@ public class EnemySystem : MonoBehaviour
     
     void Update()
     {
-        if (player != null)
+        if (player != null && canSeePlayer)
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -41,9 +42,13 @@ public class EnemySystem : MonoBehaviour
                 isChasing = true;
             }
             else
-            { 
+            {
                 isChasing = false;
             }
+        }
+        else if (!canSeePlayer)
+        {
+            isChasing = false; // Make sure enemy doesn't chase while player is invisible
         }
 
         if (isChasing)
@@ -96,4 +101,12 @@ public class EnemySystem : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y, minBound.y, maxBound.y);
         return pos;
     }
+
+    public void StopTrackingPlayer()
+    {
+        canSeePlayer = false;
+        isChasing = false;
+        Debug.Log("Enemy can no longer see the player!");
+    }
+
 }
