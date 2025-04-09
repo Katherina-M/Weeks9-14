@@ -109,4 +109,10 @@ public class EnemySystem : MonoBehaviour
         Debug.Log("Enemy can no longer see the player!");
     }
 
+    public void ResumeTrackingPlayer()
+    {
+        Debug.Log("Enemy is back to tracking the player!");
+        canSeePlayer = true;
+    }
+
 }

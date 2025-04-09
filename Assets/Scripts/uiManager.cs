@@ -1,11 +1,15 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class uiManager : MonoBehaviour
 {
     public SpriteRenderer playerSprite;
     public SpriteRenderer playerBoarder;
+    public EnemySystem[] enemies;
+
 
 
     private void Start()
@@ -29,9 +33,27 @@ public class uiManager : MonoBehaviour
         if (playerBoarder != null)
         {
             playerBoarder.enabled = true;
-            Debug.Log("Player border enabled.");
+        }
+
+        //Start countdown Coroutine to reset ability
+        StartCoroutine(InvisibilityDurationCoroutine());
+    }
+
+    private IEnumerator InvisibilityDurationCoroutine()
+    {
+        yield return new WaitForSeconds(10f); // 10 sec aility
+        ResetPlayerVisuals();
+
+        //Restart Enemy tracing
+        foreach (EnemySystem enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                enemy.ResumeTrackingPlayer();
+            }
         }
     }
+
     //Listener
     public void OnPlayerBecameInvisible()
     {
@@ -53,6 +75,11 @@ public class uiManager : MonoBehaviour
         {
             playerBoarder.enabled = false;
         }
+
+        Debug.Log("Invisibility effect reset.");
+
     }
+
+
 
 }
