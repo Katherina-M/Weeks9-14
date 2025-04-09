@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class InvisibleSystem : MonoBehaviour
+public class InvisibleSystemManager: MonoBehaviour
 {
     public float moveSpeed = 5f;
+
     void Start()
     {
     }

@@ -12,6 +12,11 @@ public class InvisibilityItem : MonoBehaviour
     private Vector2 minBound, maxBound;
     private Camera mainCam;
 
+    private bool isHidden = false;
+    private float hiddenTimer = 0f;
+
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
         mainCam = Camera.main;
@@ -22,25 +27,41 @@ public class InvisibilityItem : MonoBehaviour
         minBound = new Vector2(bottomLeft.x, bottomLeft.y);
         maxBound = new Vector2(topRight.x, topRight.y);
 
-        //Place the orb randomly
-        if (!hasSetPosition)
-        {
-            float x = Random.Range(minBound.x + 0.5f, maxBound.x - 0.5f);
-            float y = Random.Range(minBound.y + 0.5f, maxBound.y - 0.5f);
-            transform.position = new Vector2(x, y);
-            hasSetPosition = true;
-        }
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        SetRandomPosition();
     }
 
     void Update()
     {
+        if (isHidden)
+        {
+            hiddenTimer -= Time.deltaTime;
+            if (hiddenTimer <= 0f)
+            {
+                SetRandomPosition();
+                spriteRenderer.enabled = true;
+                isHidden = false;
+            }
+            return;
+        }
+
         if (player != null)
         {
             float distance = Vector2.Distance(transform.position, player.position);
             if (distance <= pickupRange)
             {
-                Destroy(gameObject); // Bye bye, orb!
+                spriteRenderer.enabled = false;
+                isHidden = true;
+                hiddenTimer = 5f;
             }
         }
     }
+
+        void SetRandomPosition()
+        {
+            float x = Random.Range(minBound.x + 0.5f, maxBound.x - 0.5f);
+            float y = Random.Range(minBound.y + 0.5f, maxBound.y - 0.5f);
+            transform.position = new Vector2(x, y);
+        }
 }
