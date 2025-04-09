@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Follow: {fileID: 642754487}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 4.5049825
+    OrthographicSize: 5.96
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -188,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 183430999}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.529971, y: -0.27423975, z: -10}
+  m_LocalPosition: {x: 6.5824137, y: -0.27424, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
-    m_ImpulseShape: 0
+    m_ImpulseShape: 4
     m_CustomImpulseShape:
       serializedVersion: 2
       m_Curve:
@@ -18764,7 +18764,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5049825
+  orthographic size: 5.96
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -18789,7 +18789,7 @@ Transform:
   m_GameObject: {fileID: 1134203881}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.529971, y: -0.27423975, z: -10}
+  m_LocalPosition: {x: 6.5824137, y: -0.27424, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18899,12 +18899,12 @@ MonoBehaviour:
   m_ScreenX: 0.49
   m_ScreenY: 0.5
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.14
-  m_DeadZoneHeight: 0.45
+  m_DeadZoneWidth: 0.19
+  m_DeadZoneHeight: 0.27
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.21
-  m_SoftZoneHeight: 0.58
+  m_SoftZoneWidth: 0.27
+  m_SoftZoneHeight: 0.44
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
