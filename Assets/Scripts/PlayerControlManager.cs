@@ -6,22 +6,23 @@ using UnityEngine;
 
 public class PlayerControlManager : MonoBehaviour
 {
-    public int maxHP = 20;
-    private int currentHP;
+    //HP
+    public int playerMaxHP = 20;
+    private int playerCurrentHP;
 
 
     private void Start()
     {
-        currentHP = maxHP;
+        playerCurrentHP = playerMaxHP;
         Debug.Log("Player satrt with 20HP");
     }
 
     public void TakeDamage (int damage)
     {
-        currentHP -= damage;
-        Debug.Log("Player took" + damage + "damage.CurrentHP:" + currentHP);
+        playerCurrentHP -= damage;
+        Debug.Log("Player took" + damage + "damage.CurrentHP:" + playerCurrentHP);
 
-        if (currentHP <= 0)
+        if (playerCurrentHP <= 0)
         {
             Die();
         }
@@ -29,12 +30,12 @@ public class PlayerControlManager : MonoBehaviour
 
     public void Heal (int amount)
     {
-        currentHP += amount;
-        if (currentHP > maxHP)
+        playerCurrentHP += amount;
+        if (playerCurrentHP > playerMaxHP)
         {
-            currentHP = maxHP;
+            playerCurrentHP = playerMaxHP;
         }
-        Debug.Log("Player healed " + amount + ". Current HP: " + currentHP);
+        Debug.Log("Player healed " + amount + ". Current HP: " + playerCurrentHP);
     }
 
     private void Die()

@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 441233764}
   - component: {fileID: 441233763}
   - component: {fileID: 441233765}
+  - component: {fileID: 441233766}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -221,9 +222,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   changeDirectionTime: 2
-  detectionRange: 5
+  detectionRange: 3
   player: {fileID: 1408487597}
   mainCam: {fileID: 1299034993}
+--- !u!114 &441233766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441233762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18bdb37e8c5dc54a93e45fab3090c82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMaxHP: 10
+  attackDamage: 2
+  attackCooldown: 1
+  player: {fileID: 1408487597}
+  attackRange: 1.5
 --- !u!1 &468082351
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +647,7 @@ GameObject:
   - component: {fileID: 1408487597}
   - component: {fileID: 1408487596}
   - component: {fileID: 1408487595}
+  - component: {fileID: 1408487598}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -717,6 +736,19 @@ Transform:
   - {fileID: 1835068712}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1408487598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408487594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96dafb0d0d2d80443a33a5685576953c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMaxHP: 20
 --- !u!1 &1835068710
 GameObject:
   m_ObjectHideFlags: 0
