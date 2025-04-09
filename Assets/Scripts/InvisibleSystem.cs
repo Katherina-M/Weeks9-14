@@ -15,7 +15,6 @@ public class InvisibleSystem : MonoBehaviour
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             direction += Vector2.up;
-            Debug.Log("W key held");
         }
         
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
