@@ -232,6 +232,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 47466724600763558, guid: 650f79d2b372df84fa9a036f77b606a4, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1408487597}
     - target: {fileID: 4014125844270311069, guid: 650f79d2b372df84fa9a036f77b606a4, type: 3}
       propertyPath: m_Name
       value: Orb
