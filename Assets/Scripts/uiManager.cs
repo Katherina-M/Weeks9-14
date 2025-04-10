@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class uiManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class uiManager : MonoBehaviour
     public SpriteRenderer playerSprite;
     public SpriteRenderer playerBoarder;
     public EnemySystem[] enemies;
+    public CanvasGroup gameOverCanvas;
 
 
 
@@ -18,6 +20,8 @@ public class uiManager : MonoBehaviour
         {
             playerBoarder.enabled = false;
         }
+
+        HideGameOverScreen();
     }
     public void ApplyInvisibilityEffect()
     {
@@ -80,6 +84,25 @@ public class uiManager : MonoBehaviour
 
     }
 
+    public void ShowGameOverScreen()
+    {
+        //Show game over when player die
+        gameOverCanvas.alpha = 1;
+        gameOverCanvas.interactable = true;
+        gameOverCanvas.blocksRaycasts = true;
+    }
 
+    public void HideGameOverScreen()
+    {
+        //Hide game over screen at the start of the game
+        gameOverCanvas.alpha = 0;
+        gameOverCanvas.interactable = false;
+        gameOverCanvas.blocksRaycasts = false;
+    }
 
+    public void RestartGame()
+    {
+        //Reload game screen
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

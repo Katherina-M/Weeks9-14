@@ -17,6 +17,8 @@ public class PlayerHPandAttackManager : MonoBehaviour
     public int attackDamage = 2;
     public float attackRange = 1.5f;
 
+    public uiManager uiManager;
+
 
     private void Start()
     {
@@ -78,6 +80,12 @@ public class PlayerHPandAttackManager : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player Died.");
+
+        //When player die show game over screen
+        if (uiManager != null)
+        {
+            uiManager.ShowGameOverScreen();
+        }
 
     }
 
