@@ -19,7 +19,6 @@ public class PlayerHPandAttackManager : MonoBehaviour
 
     public uiManager uiManager;
 
-
     private void Start()
     {
         playerCurrentHP = playerMaxHP;
@@ -28,6 +27,13 @@ public class PlayerHPandAttackManager : MonoBehaviour
 
     private void Update()
     {
+        //Enemy only attack whhen player alive
+        if (playerCurrentHP <= 0)
+        {
+            return;
+        }
+
+
         //Hitiing space bar or left button to attack enemy
         if (Input.GetKeyUp(KeyCode.Space) || (Input.GetMouseButtonDown(0)))
         {
@@ -58,7 +64,9 @@ public class PlayerHPandAttackManager : MonoBehaviour
 
     public void TakeDamage (int damage)
     {
+
         playerCurrentHP -= damage;
+
         Debug.Log("Player took" + damage + "damage.CurrentHP:" + playerCurrentHP);
 
         if (playerCurrentHP <= 0)
@@ -70,10 +78,12 @@ public class PlayerHPandAttackManager : MonoBehaviour
     public void playerHeal (int amount)
     {
         playerCurrentHP += amount;
+
         if (playerCurrentHP > playerMaxHP)
         {
             playerCurrentHP = playerMaxHP;
         }
+
         Debug.Log("Player healed " + amount + ". Current HP: " + playerCurrentHP);
     }
 
@@ -89,5 +99,10 @@ public class PlayerHPandAttackManager : MonoBehaviour
 
     }
 
+    // Allow enemies to check player's HP.
+    public int CurrentHP
+    {
+        get { return playerCurrentHP; }
+    }
 
 }

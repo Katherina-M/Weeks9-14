@@ -35,19 +35,39 @@ public class EnemyHPandAttackManager : MonoBehaviour
 
     private void Update()
     {
+        // Check if the player is dead by verifying their current HP
+        if (player != null)
+        {
+            PlayerHPandAttackManager playerControl = player.GetComponent<PlayerHPandAttackManager>();
+            if (playerControl != null && playerControl.CurrentHP <= 0)
+            {
+                // If the player is dead, do not attack
+            }
+        }
+
         //Updated cooldown time
         if (attackTimer > 0f)
         {
             attackTimer -= Time.deltaTime;
         }
 
+        //Check if player alive
+        if (player != null)
+        {
+            PlayerHPandAttackManager playerControl = player.GetComponent<PlayerHPandAttackManager>();
+            if (playerControl != null && playerControl.CurrentHP <= 0)
+            {
+                return;
+            }
+        }
+
         //Check player under attack range or not
         if (player != null)
         {
             float distance = Vector2.Distance(transform.position, player.position);
-           
+
             //Debug.Log("Distance to player: " + distance);
-            
+
             if (distance <= attackRange && attackTimer <= 0f)
             {
                 Debug.Log("Player in range, attempting attack");
@@ -89,13 +109,21 @@ public class EnemyHPandAttackManager : MonoBehaviour
     }
     private void Attack()
     {
+        //Stop enemy attack
+        if (player == null)
+        {
+            return;
+        }
+
         //Auto-damage the player when is under the range
         PlayerHPandAttackManager playerControl = player.GetComponent<PlayerHPandAttackManager>();
         if (playerControl != null)
         {
+            //Damage player
             playerControl.TakeDamage(attackDamage);
             Debug.Log("Enemy attacked the player for " + attackDamage + " damage.");
         }
+
         // Reset the attack cooldown timer
         attackTimer = attackCooldown;
     }
