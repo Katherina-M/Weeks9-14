@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static InvisibilityEvent;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -12,6 +13,17 @@ public class EnemySpawner : MonoBehaviour
     public Vector2 spawnAreaMax = new Vector2(5f, 5f);
 
     public Transform player;
+
+    public InvisibilityEvent invisibilityEvent;
+
+    private void Awake()
+    {
+        // Look for the InvisibilityEvent instance if not already assigned.
+        if (invisibilityEvent == null)
+        {
+            invisibilityEvent = FindObjectOfType<InvisibilityEvent>();
+        }
+    }
 
     private void Start()
     {
@@ -42,6 +54,13 @@ public class EnemySpawner : MonoBehaviour
             if (enemyScript != null && player != null)
             {
                 enemyScript.player = player;
+            }
+
+            //Stop following player
+            EnemySystem enemySystem = newEnemy.GetComponent<EnemySystem>();
+            if (enemySystem != null && invisibilityEvent != null)
+            {
+                invisibilityEvent.OnPlayerInvisible.AddListener(enemySystem.StopTrackingPlayer);
             }
         }
     }
