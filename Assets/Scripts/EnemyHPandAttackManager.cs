@@ -20,15 +20,6 @@ public class EnemyHPandAttackManager : MonoBehaviour
     public Transform player;
     public float attackRange = 1.5f;
 
-    //Enemy spawn amount
-    public bool isSpawner = false;
-    public int numberToSpawn = 5;
-    //Spawn range
-    public Vector2 spawnAreaMin = new Vector2(-5f, -5f);
-    public Vector2 spawnAreaMax = new Vector2(5f, 5f);
-    //Spawn only once
-    private static bool hasSpawned = false;
-
     private void Awake()
     {
         //Register all enemy instance
@@ -45,33 +36,7 @@ public class EnemyHPandAttackManager : MonoBehaviour
             }
         }
 
-        if (isSpawner && !hasSpawned)
-        {
-            SpawnEnemies();
-            hasSpawned = true;
-        }
-
         Debug.Log("Enemy starting HP: " + enemyCurrentHP + "HP");
-    }
-    private void SpawnEnemies()
-    {
-        for (int i = 0; i < numberToSpawn; i++)
-        {
-            // Generate a random position within the spawn area.
-            float x = Random.Range(spawnAreaMin.x, spawnAreaMax.x);
-            float y = Random.Range(spawnAreaMin.y, spawnAreaMax.y);
-            Vector2 spawnPos = new Vector2(x, y);
-
-            // Instantiate a new enemy instance
-            GameObject newEnemy = Instantiate(this.gameObject, spawnPos, Quaternion.identity);
-
-            // Prevent the cloned enemy from acting as a spawner.
-            EnemyHPandAttackManager enemyScript = newEnemy.GetComponent<EnemyHPandAttackManager>();
-            if (enemyScript != null)
-            {
-                enemyScript.isSpawner = false;
-            }
-        }
     }
 
     private void OnDestroy()

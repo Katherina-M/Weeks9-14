@@ -12,7 +12,7 @@ public class uiManager : MonoBehaviour
     public EnemySystem[] enemies;
     public CanvasGroup gameOverCanvas;
 
-
+    //Red hood pixel character is been used, here is the reference: https://legnops.itch.io/red-hood-character
 
     private void Start()
     {
