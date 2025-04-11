@@ -18,6 +18,14 @@ public class InvisibilityEvent : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if (OnPlayerInvisible == null)
+        {
+            OnPlayerInvisible = new InvisibilityEvents();
+        }
+    }
+
     public void TriggerInvisibility()
     {
         Debug.Log("Invisiable triggered, Tell all the listener");

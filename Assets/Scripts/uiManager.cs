@@ -11,6 +11,7 @@ public class uiManager : MonoBehaviour
     public SpriteRenderer playerBoarder;
     public EnemySystem[] enemies;
     public CanvasGroup gameOverCanvas;
+    public CanvasGroup winCanvas;
 
     //Red hood pixel character is been used, here is the reference: https://legnops.itch.io/red-hood-character
 
@@ -22,6 +23,7 @@ public class uiManager : MonoBehaviour
         }
 
         HideGameOverScreen();
+        HideWinScreen();
     }
     public void ApplyInvisibilityEffect()
     {
@@ -92,6 +94,15 @@ public class uiManager : MonoBehaviour
         gameOverCanvas.blocksRaycasts = true;
     }
 
+    public void ShowWinScreen()
+    {
+        //Show win when player win
+        Debug.Log("Win screen triggered");
+        gameOverCanvas.alpha = 1;
+        gameOverCanvas.interactable = true;
+        gameOverCanvas.blocksRaycasts = true;
+    }
+
     public void HideGameOverScreen()
     {
         //Hide game over screen at the start of the game
@@ -100,6 +111,13 @@ public class uiManager : MonoBehaviour
         gameOverCanvas.blocksRaycasts = false;
     }
 
+    public void HideWinScreen()
+    {
+        //Hide win screen at the start of the game
+        winCanvas.alpha = 0;
+        winCanvas.interactable = false;
+        winCanvas.blocksRaycasts = false;
+    }
     public void RestartGame()
     {
         //Reload game screen

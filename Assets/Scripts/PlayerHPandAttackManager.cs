@@ -19,6 +19,7 @@ public class PlayerHPandAttackManager : MonoBehaviour
 
     public uiManager uiManager;
 
+
     private void Start()
     {
         playerCurrentHP = playerMaxHP;
@@ -37,6 +38,7 @@ public class PlayerHPandAttackManager : MonoBehaviour
         //Hitiing space bar or left button to attack enemy
         if (Input.GetKeyUp(KeyCode.Space) || (Input.GetMouseButtonDown(0)))
         {
+
             EnemyHPandAttackManager nearestEnemy = null;
             float closestDistance = float.MaxValue;
 

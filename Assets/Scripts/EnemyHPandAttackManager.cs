@@ -20,6 +20,8 @@ public class EnemyHPandAttackManager : MonoBehaviour
     public Transform player;
     public float attackRange = 1.5f;
 
+    public uiManager uiManager;
+
     private void Awake()
     {
         //Register all enemy instance
@@ -91,8 +93,11 @@ public class EnemyHPandAttackManager : MonoBehaviour
     public void TakeDamage(int damage)
     {
         //Enemy die when HP under 0
-        enemyCurrentHP -= damage;
-        Debug.Log("Enemy took " + damage + " damage. Current HP: " + enemyCurrentHP);
+        if (enemyCurrentHP > 0)
+        {
+            enemyCurrentHP -= damage;
+            Debug.Log("Enemy took " + damage + " damage. Current HP: " + enemyCurrentHP);
+        }
 
         if (enemyCurrentHP <= 0)
         {
@@ -118,6 +123,15 @@ public class EnemyHPandAttackManager : MonoBehaviour
         }
 
         Destroy(gameObject);
+        OnDestroy();
+
+        Debug.Log("Remaining enemies: " + allEnemies.Count);
+
+        // Check if there are no more enemies
+        if (allEnemies.Count == 0)
+        {
+            uiManager.ShowWinScreen();
+        }
     }
     private void Attack()
     {
